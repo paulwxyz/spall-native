@@ -6,7 +6,7 @@ import "core:fmt"
 import "core:strings"
 import "core:slice"
 import "core:mem"
-import os "core:os/old"
+import "core:os"
 import "core:math"
 import "formats:spall_fmt"
 
@@ -207,7 +207,7 @@ as_parse_next_event :: proc(trace: ^Trace, chunk: []u8, process: ^Process, threa
 	return .EventRead
 }
 
-as_parse :: proc(trace: ^Trace, fd: os.Handle, header_size: i64) -> bool {
+as_parse :: proc(trace: ^Trace, fd: ^os.File, header_size: i64) -> bool {
 	buffer_header := spall_fmt.Auto_Buffer_Header{}
 	p := &trace.parser
 
